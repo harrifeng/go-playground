@@ -17,6 +17,7 @@ func main() {
 
 	lAddr, err := net.ResolveTCPAddr("tcp4", "localhost:9876")
 	checkError(err)
+	lAddr = nil
 
 	conn, err := net.DialTCP("tcp", lAddr, rAddr)
 
