@@ -26,7 +26,7 @@ func main() {
 }
 
 func handleClient(conn net.Conn) {
-	defer conn.Close()			// extra Close
+	defer conn.Close() // extra Close
 	var buf [512]byte
 	for {
 		n, err := conn.Read(buf[0:])
