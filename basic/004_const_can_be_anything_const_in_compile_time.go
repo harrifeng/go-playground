@@ -3,18 +3,20 @@ package main
 import (
 	"fmt"
 	"os"
+	"unsafe"
 )
 
 func main() {
 	const (
-		s = "abc"
-		x // x = "abc"
+		a = "abc"
+		b = len(a)
+		c = unsafe.Sizeof(b)
 	)
-	fmt.Println(s, x)
+	fmt.Println(a, b, c)
 	os.Exit(0)
 }
 
 ////////////////////////////////////////////////////
 // <===================OUTPUT===================> //
-// abc abc					  //
+// abc 3 8					  //
 ////////////////////////////////////////////////////
