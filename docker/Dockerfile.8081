@@ -1,1 +1,6 @@
+# image name harrifeng/http-server
 FROM golang
+RUN wget https://raw.githubusercontent.com/harrifeng/playground/master/network/001_http_file_server.go
+EXPOSE 8081
+RUN go build 001_http_file_server.go
+CMD ./001_http_file_server.go
