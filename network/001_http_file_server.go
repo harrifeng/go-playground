@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	shareFolder := "."
+	shareFolder := "/share"
 	if len(os.Args) > 1 {
 		shareFolder = os.Args[1]
 	}
