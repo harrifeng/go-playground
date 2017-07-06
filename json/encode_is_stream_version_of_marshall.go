@@ -29,7 +29,7 @@ func main() {
 }
 
 // <===================OUTPUT===================>
-// $ go run encode_decode_between_string_and_binary.go
+// $ go run encode_is_stream_version_of_marshall.go
 // {"Name": 1}
 // {"Name":1}
 // {"Age": 12}
