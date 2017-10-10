@@ -43,6 +43,8 @@ func main() {
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
+
+	fmt.Println("<--Time used-->:", time.Since(start))
 	fmt.Println("repair finished")
 	fmt.Println()
 	os.Exit(0)
