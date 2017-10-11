@@ -28,6 +28,7 @@ func main() {
 	scanner := bufio.NewScanner(file)
 
 	var wg sync.WaitGroup
+	var tokens = make(chan struct{}, 10)
 
 	for scanner.Scan() {
 		http_body, err := base64.StdEncoding.DecodeString(scanner.Text())
@@ -39,10 +40,12 @@ func main() {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
+			tokens <- struct{}{}
 			time.Sleep(200 * time.Millisecond)
 
 			fmt.Println(len(http_body))
 			log.Println("done one-->")
+			<-tokens
 		}()
 
 	}
