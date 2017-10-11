@@ -7,9 +7,8 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sync"
 	"time"
-
-	"github.com/korovkin/limiter"
 )
 
 func main() {
@@ -28,7 +27,8 @@ func main() {
 
 	scanner := bufio.NewScanner(file)
 
-	limit := limiter.NewConcurrencyLimiter(10)
+	var wg sync.WaitGroup
+
 	for scanner.Scan() {
 		http_body, err := base64.StdEncoding.DecodeString(scanner.Text())
 		_ = http_body
@@ -36,21 +36,22 @@ func main() {
 			log.Fatal(err)
 		}
 
-		var postToLocal = func() {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
 			time.Sleep(200 * time.Millisecond)
 
 			fmt.Println(len(http_body))
 			log.Println("done one-->")
-		}
+		}()
 
-		limit.Execute(postToLocal)
 	}
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
 
-	limit.Wait()
+	wg.Wait()
 	fmt.Println("<--Time used-->:", time.Since(start))
 	fmt.Println("repair finished")
 	fmt.Println()
