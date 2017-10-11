@@ -12,12 +12,6 @@ import (
 	"github.com/korovkin/limiter"
 )
 
-func postToLocal(json_body []byte) {
-	time.Sleep(200 * time.Millisecond)
-
-	log.Println("done one-->")
-}
-
 func main() {
 
 	start := time.Now()
@@ -42,10 +36,14 @@ func main() {
 			log.Fatal(err)
 		}
 
-		limit.Execute(func() {
+		var postToLocal = func() {
 			time.Sleep(200 * time.Millisecond)
-			fmt.Println("hello")
-		})
+
+			fmt.Println(len(http_body))
+			log.Println("done one-->")
+		}
+
+		limit.Execute(postToLocal)
 	}
 
 	if err := scanner.Err(); err != nil {
