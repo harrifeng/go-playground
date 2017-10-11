@@ -8,6 +8,8 @@ import (
 	"log"
 	"os"
 	"time"
+
+	"github.com/korovkin/limiter"
 )
 
 func postToLocal(json_body []byte) {
@@ -32,18 +34,25 @@ func main() {
 
 	scanner := bufio.NewScanner(file)
 
+	limit := limiter.NewConcurrencyLimiter(10)
 	for scanner.Scan() {
 		http_body, err := base64.StdEncoding.DecodeString(scanner.Text())
+		_ = http_body
 		if err != nil {
 			log.Fatal(err)
 		}
-		postToLocal(http_body)
+
+		limit.Execute(func() {
+			time.Sleep(200 * time.Millisecond)
+			fmt.Println("hello")
+		})
 	}
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
 
+	limit.Wait()
 	fmt.Println("<--Time used-->:", time.Since(start))
 	fmt.Println("repair finished")
 	fmt.Println()
