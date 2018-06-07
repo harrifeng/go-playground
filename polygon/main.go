@@ -10,8 +10,9 @@ import (
 
 func main() {
 	// latitude, longtitude
-	point := geo.NewPoint(4.9402900, 114.9480600)
-	demo, err := polygonFromFile("./data/demo.json")
+	// point := geo.NewPoint(4.9402900, 114.9480600)
+	point := geo.NewPoint(39.896568, 116.422279)
+	demo, err := polygonFromFile("./data/110000.json")
 	if err != nil {
 		fmt.Println(err)
 	}
