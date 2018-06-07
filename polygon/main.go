@@ -9,13 +9,13 @@ import (
 )
 
 func main() {
-
-	point := geo.Point{}
+	// latitude, longtitude
+	point := geo.NewPoint(4.9402900, 114.9480600)
 	demo, err := polygonFromFile("./data/demo.json")
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(demo.Contains(&point))
+	fmt.Println(demo.Contains(point))
 	os.Exit(0)
 }
 
