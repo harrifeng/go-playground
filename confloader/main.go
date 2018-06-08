@@ -16,6 +16,10 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(viper.Get("Points"))
+
+	tmp := viper.GetStringMap("http")
+	fmt.Printf("%T %v\n", tmp["port"], tmp["port"])
+	fmt.Printf("%T %v\n", tmp["user"], tmp["user"])
+
 	os.Exit(0)
 }

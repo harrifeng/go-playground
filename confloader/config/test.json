@@ -1,8 +1,6 @@
 {
-  "Points": [
-    {
-      "lat": 1,
-      "lng": 21
-    }
-  ]
+  "http":     {
+    "port": 5693,
+    "user": "admin"
+  }
 }
