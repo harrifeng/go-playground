@@ -16,6 +16,6 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println()
+	fmt.Println(viper.Get("Points"))
 	os.Exit(0)
 }
